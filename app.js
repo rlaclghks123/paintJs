@@ -8,7 +8,7 @@ const ctx = canvas.getContext("2d");
 
 const INITIAL_COLOR = "#2c2c2c";
 const CANVAS_SIZE = 600;
-const ONCOLOR = "#8DD7FA";
+const ONCOLOR = "#F6F5E4";
 
 
 let wiping = false;
@@ -99,7 +99,7 @@ function handleWipe() {
         ctx.fillStyle = "white";
         ctx.strokeStyle = "white";
         wiping = true;
-        wipe.style.backgroundColor = "#8DD7FA";
+        wipe.style.backgroundColor = ONCOLOR;
     }
 }
 

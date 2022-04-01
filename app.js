@@ -2,6 +2,7 @@ const canvas = document.querySelector("#jsCanvas");
 const colors = document.querySelectorAll(".jsColor")
 const range = document.querySelector("#jsRange");
 const mode = document.querySelector("#jsMode");
+const clear = document.querySelector("#jsClear");
 const ctx = canvas.getContext("2d");
 
 
@@ -66,6 +67,11 @@ function handleCanvasClick() {
     }
 }
 
+function handleClearClick() {
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+}
+
 if (canvas) {
     canvas.addEventListener("mousemove", onMouseMove);
     canvas.addEventListener("mousedown", startPainting);
@@ -82,4 +88,8 @@ if (range) {
 
 if (mode) {
     mode.addEventListener("click", handleModeClick);
+}
+
+if (clear) {
+    clear.addEventListener("click", handleClearClick);
 }

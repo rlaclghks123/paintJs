@@ -3,14 +3,18 @@ const colors = document.querySelectorAll(".jsColor")
 const range = document.querySelector("#jsRange");
 const mode = document.querySelector("#jsMode");
 const clear = document.querySelector("#jsClear");
+const wipe = document.getElementById("jsWipe");
 const ctx = canvas.getContext("2d");
-
-
-let painting = false;
-let filling = false;
 
 const INITIAL_COLOR = "#2c2c2c";
 const CANVAS_SIZE = 600;
+const ONCOLOR = "#8DD7FA";
+
+
+let wiping = false;
+let painting = false;
+let filling = false;
+let color = INITIAL_COLOR;
 
 canvas.width = CANVAS_SIZE;
 canvas.height = CANVAS_SIZE;
@@ -31,20 +35,33 @@ function stopPainting() {
 function onMouseMove(event) {
     const x = event.offsetX;
     const y = event.offsetY;
-    if (!painting) {
+
+    if (!painting && !wiping) {
         ctx.beginPath();
         ctx.moveTo(x, y);
-    } else {
+    } else if (painting && !wiping) {
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    } else if (!painting && wiping) {
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    }
+    else if (painting && wiping) {
         ctx.lineTo(x, y);
         ctx.stroke();
     }
 }
 
+
+
 function handleColorClick(event) {
-    const color = event.target.style.backgroundColor;
+
+    color = event.target.style.backgroundColor;
     ctx.strokeStyle = color;
     ctx.fillStyle = color;
+
 }
+
 
 function handleModeChange(event) {
     const size = event.target.value;
@@ -54,10 +71,10 @@ function handleModeChange(event) {
 function handleModeClick() {
     if (filling === true) {
         filling = false;
-        mode.innerText = "fill";
+        mode.style.backgroundColor = "white";
     } else {
         filling = true;
-        mode.innerText = "paint";
+        mode.style.backgroundColor = ONCOLOR;
     }
 }
 
@@ -67,9 +84,23 @@ function handleCanvasClick() {
     }
 }
 
+
 function handleClearClick() {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+}
+
+function handleWipe() {
+    if (wiping) {
+        ctx.strokeStyle = color;
+        wiping = false;
+        wipe.style.backgroundColor = "white";
+    } else {
+        ctx.fillStyle = "white";
+        ctx.strokeStyle = "white";
+        wiping = true;
+        wipe.style.backgroundColor = "#8DD7FA";
+    }
 }
 
 if (canvas) {
@@ -79,6 +110,7 @@ if (canvas) {
     canvas.addEventListener("mouseleave", stopPainting);
     canvas.addEventListener("click", handleCanvasClick);
 }
+
 
 Array.from(colors).forEach((color) => color.addEventListener("click", handleColorClick));
 
@@ -93,3 +125,8 @@ if (mode) {
 if (clear) {
     clear.addEventListener("click", handleClearClick);
 }
+
+if (wipe) {
+    wipe.addEventListener("click", handleWipe);
+}
+

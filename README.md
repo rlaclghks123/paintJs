@@ -33,3 +33,18 @@
           canvas내에서만 작동을 해주기 위해 mouseleave를 사용.
 
   ---
+
+<br>
+
+- ## <정보>
+- - [x]  clientX와 offsetX의 차이점 : clientX는 window를 기준으로서의 크기이고, offsetX는 크기를 지정한, (paintJs에선) canvas내에서의 위치이다.      
+  만약 window와 canvas의 크기가 같다면, clientX와 offsetX의 크기는 같다.
+
+  <br>
+- - [x]  canvas에서 선을 구현하는 원리 : 
+  1. beginPath를 통해, 시작한다.
+  2. moveTo(x,y)를 통해 x,y 즉 마우스가 움직이는 곳으로 보이지 않는 선을 계속 만든다. =>
+  3. mousedown과 같이 선을 나타내도록 할 경우, 나타내도록 하는 그 시작점부터, 
+  lineTo(x,y)를 통해 따라가는 선 같은것을 만든다.
+  4. lineTo(x,y)를 통해 따라가는 선을 stroke()를 통해 나타내준다.     
+  5. mouseup과 같이 선을 나타내지 않도록 할 경우, 다시 lineTo(x,y)로 나타낸 부분을 안보이게 해준다.

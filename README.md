@@ -14,7 +14,10 @@
 - - [x]  canvas api 사용
        
         - getContext("2d") 를 사용하여, 2d를 사용할수 있도록 구현.
+        - fillRect를 통해, 채우기 기능 구현.
         - context의 strokeStyle을 통해, 선의 색상을 구현
+        - context의 stokeStyle을 흰색으로 만듦으로 지우기 기능 구현.
+        - context의 fillStyle을 통해, 채우기의 색상 또한 구현.
         - range와 context의 lineWidth를 통해, 선의 굵기를 조절
   ---
 

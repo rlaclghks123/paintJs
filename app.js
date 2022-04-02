@@ -7,7 +7,7 @@ const wipe = document.getElementById("jsWipe");
 const ctx = canvas.getContext("2d");
 
 const INITIAL_COLOR = "#2c2c2c";
-const CANVAS_SIZE = 600;
+const CANVAS_SIZE = 500;
 const ONCOLOR = "#F6F5E4";
 
 
